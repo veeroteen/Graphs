@@ -1,17 +1,19 @@
 #include "IGraph.h"
 IGraph::IGraph(IGraph* oth) {
-    std::vector<std::unordered_set<int>> tmp;
-    ToUnif(tmp);
-    ToDefine(tmp);
+    
 };
 
-
+MatrixGraph::MatrixGraph(const IGraph* oth) {
+    std::vector<std::unordered_set<int>> tmp;
+    oth->ToUnif(tmp);
+    ToDefine(tmp);
+}
 MatrixGraph::MatrixGraph() {
     std::vector<bool> tmp = { false };
     matrix.push_back(tmp);
 }
 
-MatrixGraph::MatrixGraph(MatrixGraph& graph) {
+MatrixGraph::MatrixGraph(const MatrixGraph& graph) {
     matrix = graph.matrix;
 }
 
@@ -63,14 +65,15 @@ void MatrixGraph::ToUnif(std::vector<std::unordered_set<int>>& list) const {
     }
 };
 
-void MatrixGraph::ToDefine(std::vector<std::unordered_set<int>>& list) {
+void MatrixGraph::ToDefine(const std::vector<std::unordered_set<int>>& list) {
     matrix.clear();
     for (int y = 0; y < list.size(); y++) {
         matrix.emplace_back();
         for (int x = 0; x < list.size(); x++) {
             matrix[y].push_back(false);
-            if (list[y].contains(x + 1));
-            matrix[y][x] = true;
+            if (list[y].contains(x + 1)) {
+                matrix[y][x] = true;
+            }
         }
     }
 }
@@ -82,11 +85,15 @@ ListGraph::ListGraph() {
     list.emplace_back();
 }
 
-ListGraph::ListGraph(ListGraph& graph) {
+ListGraph::ListGraph(const ListGraph& graph) {
     list = graph.list;
 }
 
-ListGraph::ListGraph(IGraph* _oth) : IGraph(_oth) {};
+ListGraph::ListGraph(const IGraph* oth) {
+    std::vector<std::unordered_set<int>> tmp;
+    oth->ToUnif(tmp);
+    ToDefine(tmp);
+};
 void ListGraph::AddEdge(int from, int to) {
     if (from > to) {
         int tmp = to;
@@ -123,6 +130,6 @@ void ListGraph::ToUnif(std::vector<std::unordered_set<int>>& list) const {
 }
 
 
-void ListGraph::ToDefine(std::vector<std::unordered_set<int>>& list) {
+void ListGraph::ToDefine(const std::vector<std::unordered_set<int>>& list) {
     this->list = list;
 }
