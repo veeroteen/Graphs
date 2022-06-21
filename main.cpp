@@ -25,8 +25,8 @@ int main()
 
 
 
-
-
+    delete lgraph;
+    delete mgraph;
 
 
 
