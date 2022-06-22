@@ -1,7 +1,4 @@
 #include "IGraph.h"
-IGraph::IGraph(IGraph* oth) {
-    
-};
 
 MatrixGraph::MatrixGraph(const IGraph* oth) {
     std::vector<std::unordered_set<int>> tmp;
