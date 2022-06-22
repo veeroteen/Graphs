@@ -14,8 +14,7 @@ int main()
     for (int i = 0; i < larr.size(); i++) {
         cout << larr[i] << endl;
     }
-    cout << "hello" << endl;
-
+    cout << endl;
     IGraph* mgraph = new MatrixGraph(lgraph);
     vector<int> marr;
     mgraph->GetNextVertices(1, marr);
