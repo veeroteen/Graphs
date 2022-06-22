@@ -18,7 +18,7 @@ void MatrixGraph::AddEdge(int from, int to) {
     if (from > to) {
         int tmp = to;
         to = from;
-        from = to;
+        from = tmp;
     }
     if (to > matrix.size()) {
         for (int i = 0; i < to - 1; i++) {
@@ -95,7 +95,7 @@ void ListGraph::AddEdge(int from, int to) {
     if (from > to) {
         int tmp = to;
         to = from;
-        from = to;
+        from = tmp;
     }
 
     if (to > list.size()) {
